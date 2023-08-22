@@ -5,8 +5,30 @@
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+            <x-text-input id="name" class="block mt-1 w-full" 
+                            type="text" 
+                            name="name" 
+                            minlength="3"
+                            maxlength="40"
+                            placeholder="3-40 characters"
+                            :value="old('name')" 
+                            required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
+        </div>
+
+        <!-- Phone -->
+        <div>
+            <x-input-label for="phone" :value="__('Phone Number')" />
+            <x-text-input id="phone" class="block mt-1 w-full" 
+                            type="text"
+                            name="phone"
+                            maxlength="12"
+                            minlength="12"
+                            pattern="08[0-9]{10}"
+                            placeholder="12 digit phone number starting with 08"
+                            :value="old('phone')" 
+                            required autofocus autocomplete="phone"/>
+            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
         </div>
 
         <!-- Email Address -->
@@ -23,6 +45,9 @@
             <x-text-input id="password" class="block mt-1 w-full"
                             type="password"
                             name="password"
+                            minlength="6"
+                            maxLength="12"
+                            placeholder="6-12 characters"
                             required autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
