@@ -13,8 +13,8 @@
        @if (Auth::guest())
         <!-- Login & Register Buttons -->
         <div class="ml-auto">
-            <a href="#" class="btn btn-primary mx-2">Login</a>
-            <a href="#" class="btn btn-secondary">Register</a>
+            <a href="{{ route('login')  }}" class="btn btn-primary mx-2">Login</a>
+            <a href="{{ route('register')  }}" class="btn btn-secondary">Register</a>
         </div>
         @elseif (Auth::user()->role == 'user')
             <a href="#" class="btn btn-primary mx-2">Transaction Page</a>
