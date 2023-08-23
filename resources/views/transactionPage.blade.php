@@ -43,7 +43,7 @@
                         </div>
                         <div class="col-md-6">
                             <input id="alamat" type="text" class="form-control mb-2" placeholder="Input Shipment Address" name="address" minlength="10" maxlength="100" required>
-                            <input id="ZIP" type="text" class="form-control" placeholder="Input ZIP Code" name="ZIPCode" maxlength="5" minlength="5" pattern="[0-9]{5}" required>
+                            <input id="ZIP" type="text" class="form-control" placeholder="Input ZIP Code" name="post" maxlength="5" minlength="5" pattern="[0-9]{5}" required>
                         </div>
                     </div>
                 </div>

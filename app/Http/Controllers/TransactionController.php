@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cart;
-use App\Models\Product;
+use App\Models\Products;
 use App\Models\User;
 use App\Models\TrHeader;
 use App\Models\TrDetail;
@@ -64,17 +64,34 @@ class TransactionController extends Controller
     public function store(Request $request){
         $email = Auth :: user()->email;
         $carts = Cart::where('email', $email)->get();
-        $invoiceNO = $request->invoiceNO;
+        $invoiceNO = $request->InvoiceNo;
 
         $TrHeader = new TrHeader();
+        $TrHeader -> email = $email;
+        $TrHeader -> invoice = $invoiceNO;
+        $TrHeader -> address = $request->address;
+        $TrHeader -> post = $request->post;
+        $TrHeader -> save();
+
+
 
         foreach($carts as $cart){
-            $product = Product::find($cart->product_id);
+
+            $TrDetail = new TrDetail();
+            $TrDetail -> transaction_id = TrHeader::where('invoice', $invoiceNO)->first()->id;
+            $TrDetail -> invoice = $invoiceNO;
+            $TrDetail -> product_id = $cart->product_id;
+            $TrDetail -> qtc = $cart->qtc;
+            $TrDetail -> save();
+
+            $product = Products::find($cart->product_id);
             $product->update([
                 'qtc' => $product->qtc - $cart->qtc
             ]);
+
+            Cart::where('email', $email)->where('product_id', $cart->product_id)->delete();
         }
-        Cart::where('email', $email)->delete();
+
         return redirect()->route('dashboard');
     }
 

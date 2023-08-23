@@ -20,7 +20,7 @@ class TrHeader extends Model
 
     public function trDetails()
     {
-        return $this->hasMany(TrDetail::class, 'invoice', 'invoice');
+        return $this->hasMany(TrDetail::class, 'transaction_id', 'id');
     }
 
     public function user(): HasOne

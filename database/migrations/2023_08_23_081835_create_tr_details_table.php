@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('tr_details', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('transaction_id');
             $table->string('invoice');
-            $table->string('product_id');
+            $table->unsignedBigInteger('product_id');
             $table->integer('qtc');
+            $table->foreign('transaction_id')->references('id')->on('tr_headers');
+            $table->foreign('product_id')->references('id')->on('products');
             $table->timestamps();
         });
     }
