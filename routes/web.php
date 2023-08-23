@@ -32,7 +32,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/product/{id}',[ProductController::class,'update'])->name('product.update'); 
     Route::delete('/product/{id}',[ProductController::class,'destroy'])->name('product.delete'); 
     
-    Route::post('/addToCart/{id}',[TransactionController::class,'addToCart'])->name('product.addToCart');
+    Route::get('/cart',[TransactionController::class,'showCart'])->name('cart.show');
+    Route::post('/cart/{id}',[TransactionController::class,'addToCart'])->name('cart.create');
+    Route::patch('/cart/{id}',[TransactionController::class,'updateQTC'])->name('cart.update');
+    Route::delete('/cart/{id}',[TransactionController::class,'remove'])->name('cart.delete');
+
+    Route::get('/transaction',[TransactionController::class,'showTransacionPage'])->name('transaction.show');
+    Route::post('/transaction',[TransactionController::class,'store'])->name('transaction.store');
 });
 
 require __DIR__.'/auth.php';

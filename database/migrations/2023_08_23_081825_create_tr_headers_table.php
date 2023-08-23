@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('tr_headers', function (Blueprint $table) {
             $table->id();
+            $table->string('email');
+            $table->string('invoice');
+            $table->string('address');
+            $table->string('post');
+            $table->foreign('email')->references('email')->on('users');
             $table->timestamps();
         });
     }

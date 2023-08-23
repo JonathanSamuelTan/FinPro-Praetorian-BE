@@ -26,7 +26,7 @@
                 <a href="{{ route('register')  }}" class="btn btn-secondary">Register</a>
             </div>
             @elseif (Auth::user()->role == 'user')
-                <a href="#" class="btn btn-primary mx-2">Transaction Page</a>
+                <a href="{{route('cart.show')}}" class="btn btn-primary mx-2">Cart</a>
                 <form action="{{route('logout')}}" method="post">
                     @csrf
                     <button type="submit" class="btn btn-danger">Logout</button>
@@ -57,7 +57,7 @@
                             <p class="card-text">Stock: {{$product->qtc}}</p>
                             
                             @if (Auth::guest() ||  Auth::user()->role == 'user' && $product->qtc > 0 )
-                                <form action="{{route('product.addToCart',[$product->id])}}" method="POST">
+                                <form action="{{route('cart.create',[$product->id])}}" method="POST">
                                     @csrf
                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                                     <div class="input-group mb-3">

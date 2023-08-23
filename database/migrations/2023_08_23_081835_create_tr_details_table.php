@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('tr_details', function (Blueprint $table) {
             $table->id();
+            $table->string('invoice');
+            $table->string('product_id');
+            $table->integer('qtc');
             $table->timestamps();
         });
     }

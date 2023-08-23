@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\TrHeader;
+use App\Models\TrDetail;
 use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
@@ -32,4 +34,48 @@ class TransactionController extends Controller
 
         return redirect()->route('dashboard');
     }
+
+    public function showCart(){
+        $email = Auth :: user()->email;
+        $cartItems = Cart::where('email', $email)->get();
+        return view('cart',compact('cartItems'));
+    }
+
+    public function updateQTC($id){
+        $cart = Cart::find($id);
+        $cart->qtc = request()->qtc;
+        $cart->save();
+        return redirect()->route('cart.show');
+    }
+
+    public function remove($id){
+        $cart = Cart::find($id);
+        $cart->delete();
+        return redirect()->route('cart.show');
+    }
+
+    public function showTransacionPage(){
+        $email = Auth :: user()->email;
+        $carts = Cart::where('email', $email)->get();
+        $invoiceNO = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
+        return view('transactionPage',compact('carts','invoiceNO'));
+    }
+
+    public function store(Request $request){
+        $email = Auth :: user()->email;
+        $carts = Cart::where('email', $email)->get();
+        $invoiceNO = $request->invoiceNO;
+
+        $TrHeader = new TrHeader();
+
+        foreach($carts as $cart){
+            $product = Product::find($cart->product_id);
+            $product->update([
+                'qtc' => $product->qtc - $cart->qtc
+            ]);
+        }
+        Cart::where('email', $email)->delete();
+        return redirect()->route('dashboard');
+    }
+
 }

@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Cart::class, 'email', 'email');
     }
+
+    public function trHeaders()
+    {
+        return $this->hasMany(TrHeader::class, 'email', 'email');
+    }
 }
