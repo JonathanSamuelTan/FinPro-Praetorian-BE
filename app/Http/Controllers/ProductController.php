@@ -21,7 +21,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('addProduct');
     }
 
     /**
@@ -29,7 +29,27 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'product_name' => 'required',
+            'category' => 'required',
+            'price' => 'required',
+            'qtc' => 'required',
+            'product_IMG' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $product_IMG = $request->file('product_IMG');
+        $fileName = $request->product_name.'.'.$product_IMG->getClientOriginalExtension();
+        $product_IMG->move(public_path('storage/ProductIMG'), $fileName);
+
+        $product = new Products;
+        $product->product_name = $request->product_name;
+        $product->category = $request->category;
+        $product->price = $request->price;
+        $product->qtc = $request->qtc;
+        $product->product_IMG = $fileName;
+        $product->save();
+
+        return view('adminDashboard')->with('success', 'Product has been added');
     }
 
     /**
@@ -61,6 +81,11 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // delete the image
+        $productIMG = Products::where('id', $id)->value('product_IMG');
+        unlink(public_path('storage/ProductIMG/'.$productIMG));
+
+        Products::where('id', $id)->delete();
+
     }
 }
