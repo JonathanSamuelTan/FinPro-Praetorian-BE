@@ -22,6 +22,14 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin',
         ]);
 
+        \App\Models\User::factory()->create([
+            'name' => 'user',
+            'email' => 'U@gmail.com',
+            'password' => bcrypt('password'),
+            'phone' => '085887001918',
+            'role' => 'user',
+        ]);
+
         $this->call(ProductSeeder::class);
     }
 }

@@ -44,22 +44,32 @@
       <div class="row mx-3 justify-content-center">
           @foreach($products as $product)
           <div class="col-sm-5">
-              <div class="card m-4">
-                  <div class="row g-0">
-                      <div class="col-md-4 d-flex align-items-center">
-                          <img src="{{asset('storage/ProductIMG/'. $product['product_IMG'])}}" alt="Product Image" class="img-fluid">
-                      </div>
-                      <div class="col-md-8">
-                          <div class="card-body">
-                              <h5 class="card-title fw-bold">{{$product->product_name}}</h5>
-                              <p class="card-text">{{$product->category}}</p>
-                              <p class="card-text">Price: Rp. {{ number_format($product->price, 0, ',', '.') }}</p>
-                              <p class="card-text">Stock: {{$product->qtc}}</p>
-                              <button class="btn btn-primary">Add to Transaction</button>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+            <div class="card m-4">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center">
+                        <img src="{{asset('storage/ProductIMG/'. $product['product_IMG'])}}" alt="Product Image" class="img-fluid">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">{{$product->product_name}}</h5>
+                            <p class="card-text">{{$product->category}}</p>
+                            <p class="card-text">Price: Rp. {{ number_format($product->price, 0, ',', '.') }}</p>
+                            <p class="card-text">Stock: {{$product->qtc}}</p>
+                            
+                            @if (Auth::guest() ||  Auth::user()->role == 'user' && $product->qtc > 0 )
+                                <form action="{{route('product.addToCart',[$product->id])}}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <div class="input-group mb-3">
+                                        <input type="number" class="form-control" name="qtc" min="1" max="{{ $product->qtc }}" value="1">
+                                        <button class="btn btn-primary" type="submit">Add to Invoice</button>
+                                    </div>
+                                </form>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>            
           </div>
           @endforeach
       </div>

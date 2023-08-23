@@ -31,7 +31,7 @@
                 @csrf
                 <div class="mb-3">
                     <label for="productName" class="form-label">Product Name</label>
-                    <input type="text" class="form-control" id="productName" name="product_name" required>
+                    <input type="text" class="form-control" id="productName" name="product_name" required minlength="5" maxlength="80">
                 </div>
                 <div class="mb-3">
                     <label for="category" class="form-label">Category</label>

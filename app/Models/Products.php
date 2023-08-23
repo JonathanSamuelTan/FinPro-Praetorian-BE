@@ -16,4 +16,9 @@ class Products extends Model
         'qtc', 
         'product_IMG'
     ];
+
+    public function cart()
+    {
+        return $this->hasMany(Cart::class);
+    }
 }
