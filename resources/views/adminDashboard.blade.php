@@ -35,7 +35,7 @@
     <div class="container my-5">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h2>Admin Dashboard</h2>
-            <a href="{{ route('addProduct') }}" class="btn btn-success">Add New Product</a>
+            <a href="{{ route('product.create') }}" class="btn btn-success">Add New Product</a>
         </div>
         <table class="table">
             <thead>
@@ -59,8 +59,12 @@
                     <td>Rp. {{ number_format($product->price, 0, ',', '.') }}</td>
                     <td>{{$product->qtc}}</td>
                     <td>
-                        <a href="{{ route('editProduct', ['id' => $product->id]) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <a href="{{ route('deleteProduct', ['id' => $product->id]) }}" class="btn btn-danger btn-sm">Delete</a>
+                        <a href="{{ route('product.edit',[$product->id]) }}" class="btn btn-warning btn-sm mb-3"> Edit </a>
+                        <form action="{{ route('product.delete',[$product->id]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+                        </form>
                     </td>
                 </tr>
                 @endforeach

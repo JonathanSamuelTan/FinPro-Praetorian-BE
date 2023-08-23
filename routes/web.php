@@ -25,11 +25,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/AdminDashboard',[AdminController::class,'AdminDashboard'])->name('adminDashboard');
 
-    Route::get('/addProduct',[ProductController::class,'create'])->name('addProduct');
-    Route::post('/addProduct',[ProductController::class,'store'])->name('storeProduct');
-    Route::get('/editProduct/{id}',[ProductController::class,'edit'])->name('editProduct');
-    Route::patch('/editProduct/{id}',[ProductController::class,'update'])->name('updateProduct');
-    Route::delete('/deleteProduct/{id}',[ProductController::class,'destroy'])->name('deleteProduct');
+    Route::get('/product',[ProductController::class,'create'])->name('product.create');
+    Route::post('/product',[ProductController::class,'store'])->name('product.store');
+    Route::get('/product/{id}',[ProductController::class,'edit'])->name('product.edit');
+    Route::patch('/product/{id}',[ProductController::class,'update'])->name('product.update'); 
+    Route::delete('/product/{id}',[ProductController::class,'destroy'])->name('product.delete');      
 });
 
 require __DIR__.'/auth.php';

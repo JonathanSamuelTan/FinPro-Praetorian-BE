@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PT Mexico | Admin Dashboard</title>
+    <title>PT Mexico | Edit Product</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
@@ -23,35 +23,37 @@
             </div>
         </div>
     </nav>
+    
       
     <div class="container d-flex justify-content-center mt-5">
         <div class="card p-4">
-            <h2 class="mb-4">Add New Product</h2>
-            <form action="{{route('product.store')}}" method="POST" enctype="multipart/form-data">
+            <h2 class="mb-4">Update Product</h2>
+            <form action="{{route('product.update',[$product->id])}}" method="POST" enctype="multipart/form-data">
                 @csrf
+                @method('PATCH')
                 <div class="mb-3">
                     <label for="productName" class="form-label">Product Name</label>
-                    <input type="text" class="form-control" id="productName" name="product_name" required>
+                    <input type="text" class="form-control" id="productName" name="product_name" value="{{$product->product_name}}">
                 </div>
                 <div class="mb-3">
                     <label for="category" class="form-label">Category</label>
                     <select class="form-select" id="category" name="category"required >
-                        <option value="Laptop">Laptop</option>
-                        <option value="Phone">Phone</option>
-                        <option value="Tablet">Tablet</option>
+                        <option value="Laptop" {{ $product->category === 'Laptop' ? 'selected' : '' }}>Laptop</option>
+                        <option value="Phone" {{ $product->category === 'Phone' ? 'selected' : '' }}>Phone</option>
+                        <option value="Tablet" {{ $product->category === 'Tablet' ? 'selected' : '' }}>Tablet</option>
                     </select>
                 </div>
                 <div class="mb-3">
                     <label for="price" class="form-label">Price</label>
-                    <input type="number" class="form-control" id="price" name="price" required>
+                    <input type="number" class="form-control" id="price" name="price" value="{{$product->price}}">
                 </div>
                 <div class="mb-3">
                     <label for="stock" class="form-label">Stock</label>
-                    <input type="number" class="form-control" id="stock" name="qtc" required>
+                    <input type="number" class="form-control" id="stock" name="qtc" value="{{$product->qtc}}">
                 </div>
                 <div class="mb-3">
                     <label for="productImage" class="form-label">Product Image</label>
-                    <input type="file" class="form-control" id="productImage" name="product_IMG" required>
+                    <input type="file" class="form-control" id="productImage" name="product_IMG">
                 </div>
                 <button type="submit" class="btn btn-primary">Add Product</button>
             </form>

@@ -65,7 +65,8 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $product = Products::where('id',$id)->first();
+        return view('editProduct',compact('product'));
     }
 
     /**
@@ -73,7 +74,29 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $fileName;
+
+        if($request->hasFile('product_IMG')){
+            $oldImage = Products::where('id',$id) -> value('product_IMG');
+            unlink(public_path('storage/ProductIMG/'.$oldImage));
+
+            $product_IMG = $request->file('product_IMG');
+            $fileName = $request->product_name.'.'.$product_IMG->getClientOriginalExtension();
+            $product_IMG->move(public_path('storage/ProductIMG'), $fileName);
+        }else{
+            $fileName = Products::where('id',$id) -> value('product_IMG');
+        }
+
+        $product = Products::where('id',$id)->first();
+        $product->product_name = $request->product_name;
+        $product->category = $request->category;
+        $product->price = $request->price;
+        $product->qtc = $request->qtc;
+        $product->product_IMG = $fileName;
+        $product->save();
+
+        return redirect()->route('adminDashboard');
+
     }
 
     /**
@@ -86,6 +109,8 @@ class ProductController extends Controller
         unlink(public_path('storage/ProductIMG/'.$productIMG));
 
         Products::where('id', $id)->delete();
+
+        return redirect()->route('adminDashboard');
 
     }
 }
