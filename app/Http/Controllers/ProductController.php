@@ -49,7 +49,7 @@ class ProductController extends Controller
         $product->product_IMG = $fileName;
         $product->save();
 
-        return view('adminDashboard')->with('success', 'Product has been added');
+        return redirect()->route('dashboard');
     }
 
     /**

@@ -18,27 +18,17 @@
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
     
-           {{-- if not register --}}
-           @if (Auth::guest())
-            <!-- Login & Register Buttons -->
-            <div class="ml-auto">
-                <a href="{{ route('login')  }}" class="btn btn-primary mx-2">Login</a>
-                <a href="{{ route('register')  }}" class="btn btn-secondary">Register</a>
-            </div>
-            @elseif (Auth::user()->role == 'user')
-                <a href="#" class="btn btn-primary mx-2">Transaction Page</a>
+            <div class="ml-auto d-flex">
+                <a href="{{ route('dashboard') }}" class="btn btn-primary mx-2">Product Catalogue</a>
                 <form action="{{route('logout')}}" method="post">
                     @csrf
                     <button type="submit" class="btn btn-danger">Logout</button>
                 </form>
-            @elseif(Auth::user()->role == 'admin')
-                <a href="{{ route('dashboard')  }}" class="btn btn-primary mx-2">Product Catalogue</a>
-                <form action="{{route('logout')}}" method="post">
-                    @csrf
-                    <button type="submit" class="btn btn-danger">Logout</button>
-            @endif
+            </div>
         </div>
     </nav>
+    
+
 
     <br>
       
