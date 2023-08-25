@@ -92,7 +92,7 @@ class TransactionController extends Controller
             Cart::where('email', $email)->where('product_id', $cart->product_id)->delete();
         }
 
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard')-> with ('success','Transaction Success');
     }
 
 }

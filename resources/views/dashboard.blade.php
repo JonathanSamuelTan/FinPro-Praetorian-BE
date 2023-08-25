@@ -10,7 +10,7 @@
     <nav class="navbar navbar-expand-lg" style="background-color: #141E46">
         <div class="container">
             <!-- Company Logo -->
-            <a class="navbar-brand" href=""><img src="{{ asset('storage/Assets/logo.png') }}" alt="Company Logo" width="70px"></a>
+            <a class="navbar-brand" href=""><img src="{{ asset('Assets/logo.png') }}" alt="Company Logo" width="70px"></a>
     
             <!-- Search Bar and Button -->
             <form class="d-flex mx-auto">
@@ -39,6 +39,14 @@
             @endif
         </div>
     </nav>
+
+    {{-- display success message from controller and give x button --}}
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{session('success')}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
 
     <br>
       <div class="row mx-3 justify-content-center">

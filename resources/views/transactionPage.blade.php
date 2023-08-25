@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PT Mexico | Edit Product</title>
+    <title>PT Mexico | Invoice</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
@@ -11,7 +11,7 @@
     <nav class="navbar navbar-expand-lg" style="background-color: #141E46">
         <div class="container d-flex justify-content-between align-items-center">
             <!-- Company Logo on the left -->
-            <a class="navbar-brand" href=""><img src="{{ asset('storage/Assets/logo.png') }}" alt="Company Logo" width="70px"></a>
+            <a class="navbar-brand" href=""><img src="{{ asset('Assets/logo.png') }}" alt="Company Logo" width="70px"></a>
 
             <!-- Buttons on the right -->
             <div>
