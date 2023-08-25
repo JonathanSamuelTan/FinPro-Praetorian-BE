@@ -70,7 +70,7 @@
                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                                     <div class="input-group mb-3">
                                         <input type="number" class="form-control" name="qtc" min="1" max="{{ $product->qtc }}" value="1">
-                                        <button class="btn btn-primary" type="submit">Add to Invoice</button>
+                                        <button class="btn btn-primary" type="submit">Add to Cart</button>
                                     </div>
                                 </form>
                             @endif
