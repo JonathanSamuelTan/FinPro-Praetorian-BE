@@ -55,7 +55,7 @@
                     <label for="productImage" class="form-label">Product Image</label>
                     <input type="file" class="form-control" id="productImage" name="product_IMG">
                 </div>
-                <button type="submit" class="btn btn-primary">Add Product</button>
+                <button type="submit" class="btn btn-primary">Update</button>
             </form>
         </div>
     </div>

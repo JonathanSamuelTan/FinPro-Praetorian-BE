@@ -64,7 +64,7 @@
                             <p class="card-text">Price: Rp. {{ number_format($product->price, 0, ',', '.') }}</p>
                             <p class="card-text">Stock: {{$product->qtc}}</p>
                             
-                            @if (Auth::guest() ||  Auth::user()->role == 'user' && $product->qtc > 0 )
+                            @if ((Auth::guest() ||  Auth::user()->role == 'user') && $product->qtc > 0 )
                                 <form action="{{route('cart.create',[$product->id])}}" method="POST">
                                     @csrf
                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
@@ -73,6 +73,8 @@
                                         <button class="btn btn-primary" type="submit">Add to Cart</button>
                                     </div>
                                 </form>
+                            @else
+                                <button class="btn btn-danger" disabled>Sold Out</button>
                             @endif
                         </div>
                     </div>
